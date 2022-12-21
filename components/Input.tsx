@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  className: string;
+  className?: string;
 }
 
 export const Input = ({ className, ...props }: InputProps) => {

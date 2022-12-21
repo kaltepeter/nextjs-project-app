@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { JWTPayload, jwtVerify, SignJWT } from "jose";
 import { IUser } from "./api";
@@ -22,12 +23,12 @@ export const createJWT = (user: IUser) => {
     .sign(new TextEncoder().encode(process.env.JWT_SECRET!));
 };
 
-export const validateJWT = async (jwt: string): Promise<JWTPayload> => {
+export const validateJWT = async (jwt: string): Promise<User> => {
   const { payload } = await jwtVerify(
     jwt,
     new TextEncoder().encode(process.env.JWT_SECRET!)
   );
-  return payload.payload as JWTPayload;
+  return payload.payload as User;
 };
 
 export const getUserFromCookie = async (cookies: any) => {
